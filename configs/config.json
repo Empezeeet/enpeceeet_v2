@@ -1,7 +1,8 @@
 {
     "bot": {
         "token":"MTA1NTM3MDQ0NjM0Nzk2ODU4NA.GPXnnM.rziu2ZXKIoek3IpJZcxAVkDI7agGgVzALILc68",
-        "id":"1055370446347968584"
+        "id":"1055370446347968584",
+        "client_secret":"wCLOefvgNirx3xsmzuVWEltZNHe3BDzo"
     },
     "version":"1.0.0",
     "owner": {

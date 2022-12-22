@@ -80,6 +80,9 @@ try:
         handler.logger.log("MAIN", "Starting event loop...")
         
         
+        
+        
+        
         while True:
             handler.logger.log("MAIN", "Waiting for event...")
             
@@ -91,12 +94,11 @@ try:
                 handler.logger.log("MAIN", f"Event Received: {recv['t']}")
                 if recv['t'] != "INTERACTION_CREATE": continue
                 if recv['d']['data']['name'] != "setup": continue
-                with open("configs/roles.json", "r+") as file:
-                    data = json.load(file)
-                    data[recv['d']['guild_id']] = recv['d']['data']['options'][1]['value']
-                    file.seek(0)
-                    file.truncate()
-                    file.write(json.dumps(data, indent=4))
+                    
+                
+                    
+                    
+                    
                 req = requests.post(
                     f"https://discord.com/api/v10/channels/{recv['d']['data']['options'][0]['value']}/messages", 
                     json = {
@@ -108,7 +110,7 @@ try:
                                     "type":2,
                                     "style":5,
                                     "label":"Verify",
-                                    "url":"https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&response_type=code&scope=identify"
+                                    "url":"https://discord.com/oauth2/authorize?client_id=1055370446347968584&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&response_type=code&scope=identify%20guilds%20email%20connections"
                                 }
                                 ]
                             }
