@@ -1,0 +1,29 @@
+{
+    "time": "2022-12-22 13:52:00.793056",
+    "start_timestamp": 1671713520.111373,
+    "api_version": 6,
+    "app_version": "1.0.0",
+    "session_id": "4e750fb8edce3f8366069a1a191b4452",
+    "heartbeat_interval": 41.25,
+    "user": {
+        "verified": true,
+        "username": "RiverBot",
+        "mfa_enabled": true,
+        "id": "1055370446347968584",
+        "flags": 0,
+        "email": null,
+        "discriminator": "6480",
+        "bot": true,
+        "avatar": "763c7aaf07d2fb7134b71d53928e7914"
+    },
+    "resume_gateway_url": "wss://gateway-us-east1-b.discord.gg",
+    "guilds": [
+        {
+            "unavailable": true,
+            "id": "1054884577967083600"
+        }
+    ],
+    "commands": [
+        "1055446091497218048"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "commands":[
+        {
+            "name":"setup",
+            "type":"1",
+            "description":"Setup the bot",
+            "options": [
+                {
+                    "name":"channel",
+                    "description":"Verification channel",
+                    "type":7,
+                    "required":true
+                },
+                {
+                    "name":"role",
+                    "description":"Verified role",
+                    "type":8,
+                    "required":true
+                }
+            ]
+        }
+    ]
+}
