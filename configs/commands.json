@@ -1,9 +1,17 @@
 {
-    "commands":[
+    "commands": [
         {
-            "name":"setup",
-            "type":"1",
-            "description":"Setup the bot"
+            "name": "blep",
+            "type": 1,
+            "description":"Setup bot",
+            "options": [
+                {
+                    "name":"Channel",
+                    "description":"Text channel where bot will send instruction for new members how to verify.",
+                    "type":7,
+                    "required": true
+                }
+            ]
         }
     ]
 }

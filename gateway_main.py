@@ -64,7 +64,6 @@ if (ready_event) and ready_event['t'] == "READY":
             "resume_gateway_url": ready_event['d']['resume_gateway_url'],
             "guilds": ready_event['d']['guilds'],
             "commands":commands
-            
         }
         
         file.write(json.dumps(data, indent=4))
@@ -88,7 +87,7 @@ try:
             
             recv = handler.receive_json_response(handler.ws)
             if not recv: continue # If Recv is nothing just continue.9
-                
+            print(f"RECEIVED: {recv}\n\n")
             try:
                 handler.last_sequence = recv['s']
                 handler.logger.log("MAIN", f"Event Received: {recv['t']}")
