@@ -69,7 +69,47 @@ class GatewayHandler(threading.Thread):
         
         self.logger.log("GATEWAY", colored(f"Initialized after {time.time() - self.start_time} ({(time.time() - self.start_time) - self.rate_limit_sum})\n", "green"))
         self.logger.log("GATEWAY", "                                              ")
-        
+    
+    def load_command(self, command):
+        URL = f"https://discord.com/api/v10/applications/{self.APPID}/commands"
+        headers = {
+            "Authorization": f"Bot {self.TOKEN}"
+        }
+        while True:
+            self.logger.log("CLOADER", f"Creating command SETUP")
+            r = requests.post(
+                URL, 
+                headers=headers, 
+                json={
+                    "name": "setup",
+                    "type": 1,
+                    "description":"Setup bot",
+                    "options": [
+                        {
+                            "name":"channel",
+                            "description":"Text channel where bot will send instruction for new members how to verify.",
+                            "type":7,
+                            "required": True
+                        }
+                    ]
+                }
+            )
+            self.logger.log("CLOADER", f"Loaded Command with result: {r.status_code}")
+
+            if r.status_code == 429:
+                # Rate limited
+                self.logger.log("CLOADER", colored(f"Rate limited. Waiting {r.json()['retry_after']} seconds", "yellow"))
+                time.sleep(r.json()['retry_after'])
+                self.rate_limit_sum += r.json()['retry_after']
+                pass
+            
+            if r.status_code > 204 and r.status_code != 429:
+                # Error
+                self.logger.log("CLOADER", colored(f"Error: {r.json()}", "red"))
+                break
+            break
+    
+    
     def force_create_commands(self):
         url = f"https://discord.com/api/v10/applications/{self.APPID}/commands"
         headers = {

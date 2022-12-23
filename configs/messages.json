@@ -1,0 +1,26 @@
+{
+    "en-US": [
+        "**How to verify?**",
+        "1. Press server name.",
+        "2. Press \"**Linked Roles**\"",
+        "3. Press ",
+        "4. Select *RiverBot*",
+        "5. Press **Yes**"
+    ],
+    "pl": [
+        "**Jak zweryfikować się?**",
+        "1. Naciśnij nazwę serwera.",
+        "2. Naciśnij \"**Połączone Role**\"",
+        "3. Naciśnij ",
+        "4. Wybierz *RiverBot*",
+        "5. Naciśnij **Tak**"
+    ],
+    "de": [
+        "**Wie verifizieren?**",
+        "1. Drücke Servername.",
+        "2. Drücke \"**Verknüpfte Rollen**\"",
+        "3. Drücke ",
+        "4. Wähle *RiverBot*",
+        "5. Drücke **Jup!**"
+    ]
+}

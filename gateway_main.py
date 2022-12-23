@@ -92,45 +92,68 @@ try:
                 handler.last_sequence = recv['s']
                 handler.logger.log("MAIN", f"Event Received: {recv['t']}")
                 if recv['t'] != "INTERACTION_CREATE": continue
-                if recv['d']['data']['name'] != "setup": continue
-                    
+                if recv['d']['data']['name'] != "setup": continue   
                 
-                    
-                    
-                    
-                req = requests.post(
-                    f"https://discord.com/api/v10/channels/{recv['d']['data']['options'][0]['value']}/messages", 
-                    json = {
-                        "content":"Press button to verify!",
-                        "components": [
-                            {
-                                "type": 1,
-                                "components": [{
-                                    "type":2,
-                                    "style":5,
-                                    "label":"Verify",
-                                    "url":"https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&redirect_uri=https%3A%2F%2Fludicrous-sulky-chord.glitch.me%2Fcallback&response_type=code&scope=identify%20guilds%20email%20role_connections.write%20connections"
-                                }
-                                ]
-                            }
-                            
-                        ]
-                    },
-                    headers= {
-                        "Authorization": "Bot " + TOKEN,
-                        "content-type": "application/json"
-                    }
-                    
+                      
+                
+                
+                
+                
+                if len(recv['d']['data']['options']) > 2:
+                    handler.logger.log("MAIN", "SPECIFIED LANG")
+                    # ChannelID, RoleID, Language
+                    DATA = (
+                        recv['d']['data']['options'][0]['value'],
+                        recv['d']['data']['options'][1]['value'],
+                        recv['d']['data']['options'][2]['value'],
+                    )
+                
+                
+                else:
+                    handler.logger.log("MAIN", "NO LANG SPECIFIED")
+                    DATA = (
+                            recv['d']['data']['options'][0]['value'],
+                            recv['d']['data']['options'][1]['value'],
+                            False,
+                        )
+                if DATA[2] == False:
+                    # NO LANG SPECIFIED
+                    # USE GUILD LANG
+                    # IF GUILD LANG IS NOT (en-XX, pl, de) use en-US
+                    guild_lang = recv['d']['guild_locale']
+                    if guild_lang not in ["en-US", "en-GB", "pl", "de"]:
+                        guild_lang = "en-US"
+                        
+                    if guild_lang == "en-GB": guild_lang = "en-US"
+                else:
+                    guild_lang = DATA[2]
+                handler.logger.log("MAIN", f"DATA: {DATA}")
+
+                message = ""
+                with open("configs/messages.json", "r") as file:
+                    messages = json.loads(file.read())
+                    messages = messages[guild_lang]
+                    message = f"{messages[0]}\n{messages[1]}\n{messages[2]}\n{messages[3]}<@&{DATA[1]}>\n{messages[4]}\n{messages[5]}\n"
+                
+                
+
+                msgreq = requests.post(
+                    url=f"https://discord.com/api/v10/channels/{DATA[0]}/messages",
+                    headers={"Authorization": f"Bot {TOKEN}", "Content-Type": "application/json"},
+                    json={"content":message}
                 )
-                handler.logger.log('MAIN', "STATUS: " + str(req.status_code))
-                handler.logger.log("MAIN", recv)
+                
+                handler.logger.log("MAIN", f"Sent message ({msgreq.status_code})")
+                handler.logger.log("MAIN", msgreq.json())
+                
+                #handler.logger.log('MAIN', "STATUS: " + str(req.status_code))
                 # Set up bot.
                 req = requests.post(
                     f"https://discord.com/api/v10/interactions/{recv['d']['id']}/{recv['d']['token']}/callback",
                     json={"type": 4,"data": {"content": "Successfully set up the bot!"}},
                     headers={"Content-Type": "application/json"}
                 )
-                handler.logger.log("MAIN", f" set up the bot! ({req.status_code})")
+                handler.logger.log("MAIN", f"SET up the bot! ({req.status_code})")
                 
             except KeyError as e:
                 handler.logger.log(colored("ERROR", "red"), f"TypeError[main]: {e}")

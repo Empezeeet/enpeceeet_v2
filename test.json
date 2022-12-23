@@ -1,44 +1,94 @@
-Error : {
-    'code': 50035,
-    'errors': {
-        'options': {
-            '0': {
-                'name': {
-                    '_errors': [
-                        {
-                            'code': 'APPLICATION_COMMAND_INVALID_NAME',
-                            'message': 'Command name is invalid '
-                        }
-                    ]
+{
+    't': 'INTERACTION_CREATE',
+    's': 3,
+    'op': 0,
+    'd': {
+        'version': 1,
+        'type': 2,
+        'token': 'aW50ZXJhY3Rpb246MTA1NTg1Mzc0NzQxMjE0ODI0NDpjWHVGQkxYN0dmenVteUVEV0Mya3pFem5zQmFiUlVFUnlza0luYXFSNnpuOUhQWnNtcGhId2VDTTZXZ3o2V1dZSnNjT3dSMzdQcGsxUEJrZUM1aEdLR3hWa0dVRWd1NmwyZjZnZzFkaHFEakRvcXowRGlFS0tZRnlLNGk2eVBLRA',
+        'member': {
+            'user': {
+                'username': 'Empezeeet',
+                'public_flags': 4194432,
+                'id': '484252135131971584',
+                'discriminator': '8540',
+                'avatar_decoration': 'a_5ba11fabc18f76093b2533efdd765e76',
+                'avatar': '0198eb5da9e457df8a1c27856380c16c'
+            },
+            'roles': [
+                '1055047383995666434',
+                '1055161324453236867',
+                '1055161227308974211',
+                '1055100205999075428',
+                '1055047190273331220',
+                '1055099163060207646',
+                '1055161590468587610',
+                '1055100155063443486'
+            ],
+            'premium_since': None,
+            'permissions': '4398046511103',
+            'pending': False,
+            'nick': None,
+            'mute': False,
+            'joined_at': '2022-12-20T22:14:42.208000+00:00',
+            'is_pending': False,
+            'flags': 0,
+            'deaf': False,
+            'communication_disabled_until': None,
+            'avatar': None
+        },
+        'locale': 'en-GB',
+        'id': '1055853747412148244',
+        'guild_locale': 'en-US',
+        'guild_id': '1054884577967083600',
+        'entitlement_sku_ids': [],
+        'data': {
+            'type': 1,
+            'resolved': {
+                'roles': {
+                    '1055099163060207646': {
+                        'unicode_emoji': None,
+                        'tags': {
+                            'guild_connections': None
+                        },
+                        'position': 15,
+                        'permissions': '1071698529857',
+                        'name': 'Verified',
+                        'mentionable': True,
+                        'managed': True,
+                        'id': '1055099163060207646',
+                        'icon': None,
+                        'hoist': True,
+                        'flags': 0,
+                        'description': None,
+                        'color': 1752220
+                    }
                 },
-                ' name_localizations ': {
-                    ' de ': {
-                        ' _errors ': [{
-                            ' code ': ' APPLICATION_COMMAND_INVALID_NAME ',
-                            ' message ': ' Command name is invalid '
-                        }]
-                    },
-                     ' en - US ': {
-                        ' _errors ': [{
-                            ' code ': 'APPLICATION_COMMAND_INVALID_NAME',
-                            'message': 'Command name is invalid'
-                        }
-                    ]
-                },
-                'pl': {
-                    '_errors': [
-                        {
-                            'code': 'STRING_TYPE_REGEX',
-                            'message': 'String value did not match validation regex.'
-                        }, 
-                        {
-                            'code': 'APPLICATION_COMMAND_INVALID_NAME',
-                            'message': 'Command name is invalid'
-                        }
-                    ]
+                'channels': {
+                    '1055194490568179852': {
+                        'type': 0,
+                        'permissions': '4398046511103',
+                        'name': 'verify',
+                        'id': '1055194490568179852'
+                    }
                 }
-            }
-        }
+            },
+            'options': [
+                {
+                    'value': '1055194490568179852',
+                    'type': 7,
+                    'name': 'channel'
+                }, {
+                    'value': '1055099163060207646',
+                    'type': 8,
+                    'name': 'role'
+                }
+            ],
+            'name': 'setup',
+            'id': '1055446091497218048'
+        },
+        'channel_id': '1055168365708185620',
+        'application_id': '1055370446347968584',
+        'app_permissions': '2198486380247'
     }
-},
-'message' : 'Invalid Form Body'}
+}
