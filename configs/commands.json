@@ -4,6 +4,7 @@
             "name": "setup",
             "type": 1,
             "description":"Setup bot",
+            "default_member_permissions": "0x0000000000000008",
             "options": [
                 {
                     "name":"channel",

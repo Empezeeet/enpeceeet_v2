@@ -83,11 +83,9 @@ try:
         
         
         while True:
-            handler.logger.log("MAIN", "Waiting for event...")
             
             recv = handler.receive_json_response(handler.ws)
-            if not recv: continue # If Recv is nothing just continue.9
-            print(f"RECEIVED: {recv}\n\n")
+            if not recv: continue # If Recv is nothing just continue.
             try:
                 handler.last_sequence = recv['s']
                 handler.logger.log("MAIN", f"Event Received: {recv['t']}")
@@ -97,7 +95,7 @@ try:
                       
                 
                 
-                
+                # Check if user has permissions to use this command
                 
                 if len(recv['d']['data']['options']) > 2:
                     handler.logger.log("MAIN", "SPECIFIED LANG")
