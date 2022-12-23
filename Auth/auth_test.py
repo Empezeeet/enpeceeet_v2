@@ -108,12 +108,8 @@ def getAccessToken(userid):
             print(f"RETURNING: {file[userid]['token']}")
             return file[userid]['token']
         
-        
-
-if __name__ == "__main__":
-    with open("configs/config.json", "r") as config:
+with open("configs/config.json", "r") as config:
         config = json.load(config)
         global CLIENT_ID, CLIENT_SECRET
         CLIENT_ID = config['bot']['id']
-        CLIENT_SECRET = config['bot']['client_secret']
-    app.run(port=8080)
+        CLIENT_SECRET = config['bot']['client_secret']       
