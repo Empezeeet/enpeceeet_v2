@@ -192,80 +192,7 @@ class GatewayHandler(threading.Thread):
                         self.logger.log("CLOADER", f"Command {command['name']} exists in the loaded commands. Skipping...")
                     break
                 
-    def handle_command(self, command):
-        match command['data']['name']:
-            # Picks wich command to run and returns the response
-            case "pingu":
-                payload = { 
-                    "type": 4,
-                    "data": {
-                        "content": "Pong!"
-                    }
-                }
-                return payload           
-            case "uptime":
-                payload = {
-                    "type":4,
-                    "data": {
-                        "content": f"Uptime: {datetime.timedelta(seconds=time.time() - self.start_time)}"
-                    }
-                }
-                return payload
-            case "hello":
-                payload = {
-                    "type":4,
-                    "data": {
-                        "content": f"Hello, {command['member']['user']['username']}!",
-                    }
-                }
-                return payload
-            case "cytat":
-                self.logger.log("CHANDLER", "Running 'cytat' command")
-                
-                payload = {
-                    "type":9,
-                    "data": {
-                        "title": "Dodaj Nowy Cytat!",
-                        "custom_id": "cool_modal",
-                        "components": [
-                            {
-                                "type": 1,
-                                "components": [
-                                    {
-                                        "type": 4,
-                                        "custom_id": "name",
-                                        "label": "Cytat",
-                                        "style": 1,
-                                        "min_length": 1,
-                                        "max_length": 4000,
-                                        "placeholder": "",
-                                        "required": True
-                                    }
-                                ]
-                            },
-                            {
-                                "type": 1,
-                                "components": [
-                                    {
-                                        "type": 4,
-                                        "custom_id": "user",
-                                        "label": "Użytkownik",
-                                        "style": 1,
-                                        "min_length": 1,
-                                        "max_length": 4000,
-                                        "placeholder": "",
-                                        "required": True
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-                return payload
-            case _:
-                self.logger.log("CHANDLER", f"Unknown command {command['data']['name']}")
-                return {"type":1, "data": {"content": "Unknown command"}}
-
+    
     
     def receive_json_response(self, ws):
         response = None
@@ -279,6 +206,9 @@ class GatewayHandler(threading.Thread):
             
         try:
             self.last_sequence = json.loads(response)['s']
+            if json.loads(response)['op'] == 11:
+                self.logger.log("GATEWAY", "Heartbeat ACK")
+                return None
             
             if json.loads(response)['op'] == 7:
                 self.logger.log("GATEWAY", colored(f"Received reconnect request (After {time.time() - self.start_time}). Reconnecting...", "yellow"))
@@ -289,7 +219,7 @@ class GatewayHandler(threading.Thread):
                     self.send_json_request(self.ws, {
                         "op":6,
                         "d": {
-                            "token": rundata['token'],
+                            "token": self.TOKEN,
                             "session_id": rundata['session_id'],
                             "seq":self.last_sequence
                         }
@@ -300,12 +230,6 @@ class GatewayHandler(threading.Thread):
                         self.ws.close()
                         ws.close()
                         breakpoint()
-                
-            
-            
-            
-            
-            
             return json.loads(response)
         
         except AttributeError as ae:

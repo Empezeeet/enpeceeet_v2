@@ -16,4 +16,5 @@ verification system
 
 verification bot
 
-https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&permissions=2483030016&redirect_uri=https%3A%2F%2Friver-372510.lm.r.appspot.com%2Fcallback&response_type=code&scope=identify%20guilds%20bot%20role_connections.write%20email%20connections
+INVITE LINK:
+    https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&permissions=2483030032&redirect_uri=https%3A%2F%2Friver-372510.lm.r.appspot.com%2Fcallback&response_type=code&scope=identify%20email%20connections%20bot%20role_connections.write
