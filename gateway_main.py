@@ -110,7 +110,7 @@ try:
                                     "type":2,
                                     "style":5,
                                     "label":"Verify",
-                                    "url":"https://discord.com/oauth2/authorize?client_id=1055370446347968584&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&response_type=code&scope=identify%20guilds%20email%20connections"
+                                    "url":"https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&redirect_uri=https%3A%2F%2Fludicrous-sulky-chord.glitch.me%2Fcallback&response_type=code&scope=identify%20guilds%20email%20role_connections.write%20connections"
                                 }
                                 ]
                             }

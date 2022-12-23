@@ -27,11 +27,23 @@ def callback():
             "refresh_token": r.json()['refresh_token']
         }
         tokenFile.seek(0)
+        tokenFile.truncate()
         json.dump(fdata, tokenFile, indent=4)
     updateMetadata(user_data['user']['id'])
     
     print(r)
-    return """YOU DID IT! Thank you for verifying with RiverBot!"""
+    return """
+        <html>
+        <head>
+            <title>Verified!</title>
+        </head>
+        <body onload="window.close();">
+            <h1>Successfuly Verified!</h1>
+            <h2> You can now close this window.</h2>
+            <script>const closeTab = () => window.close(``, `_parent`, ``);
+                    closeTab();</script>
+        </body>
+        </html>"""
 
 @app.route('/verify')
 def verify():
@@ -47,8 +59,8 @@ def updateMetadata(userid):
     TOKEN = getAccessToken(userid)
     # hehe
     meta = {
-        "cooked": "true",
-        "how_much": "a lot"
+        "platform_name":"Successfuly Verified!",
+        
     } 
     pushMetadata(TOKEN, meta, userid)
 
@@ -59,6 +71,7 @@ def pushMetadata(token, metadata, userid):
         URL = f"https://discord.com/api/v10/users/@me/applications/1055370446347968584/role-connection"
         ACCESS_TOKEN = getAccessToken(userid)
         data = {    
+            "platform_name":"Successfuly Verified!",
             "metadata": metadata,
         }
         headers = {

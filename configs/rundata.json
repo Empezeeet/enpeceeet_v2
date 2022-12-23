@@ -1,9 +1,9 @@
 {
-    "time": "2022-12-22 20:52:53.572018",
-    "start_timestamp": 1671738772.8668754,
+    "time": "2022-12-22 21:15:06.583301",
+    "start_timestamp": 1671740105.8682153,
     "api_version": 6,
     "app_version": "1.0.0",
-    "session_id": "10d3a888ba144eae836a51bb2ab16feb",
+    "session_id": "9d69d2911ca70994e6592803c7ebec3b",
     "heartbeat_interval": 41.25,
     "user": {
         "verified": true,
@@ -16,7 +16,7 @@
         "bot": true,
         "avatar": "763c7aaf07d2fb7134b71d53928e7914"
     },
-    "resume_gateway_url": "wss://gateway-us-east1-b.discord.gg",
+    "resume_gateway_url": "wss://gateway-us-east1-c.discord.gg",
     "guilds": [
         {
             "unavailable": true,
