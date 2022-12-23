@@ -13,7 +13,7 @@ def callback():
         "client_secret": "wCLOefvgNirx3xsmzuVWEltZNHe3BDzo",
         "grant_type": "authorization_code",
         "code": code,
-        "redirect_uri": "http://localhost:8080/callback",
+        "redirect_uri": "https://river-372510.lm.r.appspot.com/callback",
     }
     r = requests.post("https://discord.com/api/oauth2/token", data=data)
     print(f"TOKEN: {r.json()}")
@@ -59,7 +59,7 @@ def test():
 
 @app.route('/verify')
 def verify():
-    return flask.redirect("https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fcallback&response_type=code&scope=identify%20email%20guilds%20role_connections.write%20connections")
+    return flask.redirect("https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&redirect_uri=https%3A%2F%2Friver-372510.lm.r.appspot.com%2Fcallback&response_type=code&scope=identify%20guilds%20email%20connections%20role_connections.write")
 
 def getUserData(bearer):
     URL = 'https://discord.com/api/v10/oauth2/@me'
