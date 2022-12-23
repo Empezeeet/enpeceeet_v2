@@ -135,6 +135,20 @@ class GatewayHandler(threading.Thread):
                         self.logger.log("CLOADER", colored(f"Error: {r.json()}", "red"))
                         break
                     break
+            for command in requests.get(url, headers={"Authorization": f"Bot {self.TOKEN}"}).json():
+                while True:
+                    if command['name'] not in self.active_commands:
+                        self.logger.log("CLOADER", f"Command {command['name']} does not exist in the loaded commands. Deleting...")
+                        r = requests.delete(f"{url}/{command['id']}", headers=headers)
+                        if r.status_code == 429:
+                            # Rate limited
+                            self.logger.log("CLOADER", colored(f"Rate limited. Waiting {r.json()['retry_after']} seconds", "yellow"))
+                            time.sleep(r.json()['retry_after'])
+                            self.rate_limit_sum += r.json()['retry_after']
+                            pass
+                    else:
+                        self.logger.log("CLOADER", f"Command {command['name']} exists in the loaded commands. Skipping...")
+                    break
     
     def setup_commands2(self):
         url = f"https://discord.com/api/v10/applications/{self.APPID}/commands"
