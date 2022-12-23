@@ -45,7 +45,7 @@ def callback():
         </body>
         </html>"""
 
-@app.rout('/test')
+@app.route('/test')
 def test():
     with open("configs/links.json") as file:
         return f"""
