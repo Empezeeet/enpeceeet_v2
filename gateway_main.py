@@ -89,6 +89,7 @@ try:
             try:
                 handler.last_sequence = recv['s']
                 handler.logger.log("MAIN", f"Event Received: {recv['t']}")
+                print(recv)
                 if recv['t'] != "INTERACTION_CREATE": continue
                 if recv['d']['data']['name'] != "setup": continue   
                 
