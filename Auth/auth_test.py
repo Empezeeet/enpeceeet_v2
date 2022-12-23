@@ -45,6 +45,18 @@ def callback():
         </body>
         </html>"""
 
+@app.rout('/test')
+def test():
+    with open("configs/links.json") as file:
+        return f"""
+            Verify: {json.load(file)['links'][0]}
+            Invite: {json.load(file)['links'][1]}
+        """
+
+
+
+
+
 @app.route('/verify')
 def verify():
     return flask.redirect("https://discord.com/api/oauth2/authorize?client_id=1055370446347968584&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fcallback&response_type=code&scope=identify%20email%20guilds%20role_connections.write%20connections")
