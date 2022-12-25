@@ -216,7 +216,7 @@ class GatewayHandler(threading.Thread):
             self.logger.log("GATEWAY", "Connection Closed")
             self.logger.log(colored("GERROR", "red"), e)
             ws.close()
-            breakpoint()
+            exit()
             
         try:
             self.last_sequence = json.loads(response)['s']
@@ -243,7 +243,6 @@ class GatewayHandler(threading.Thread):
                         self.logger.log("GATEWAY", colored("Cannot resume. Disconnecting...", "red"))
                         self.ws.close()
                         ws.close()
-                        breakpoint()
             return json.loads(response)
         
         except AttributeError as ae:
@@ -257,7 +256,7 @@ class GatewayHandler(threading.Thread):
         except ConnectionError as e:
             ws.close()
             self.logger.log("ERROR", "Connection Error")
-            breakpoint()
+            exit()
     def send_json_request(self, ws, request):
         ws.send(json.dumps(request))
     def start_heartbeating(self, ws, interval):

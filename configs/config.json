@@ -4,13 +4,13 @@
         "id":"1055370446347968584",
         "client_secret":"wCLOefvgNirx3xsmzuVWEltZNHe3BDzo"
     },
-    "version":"1.0.0",
+    "version":"1.0.1",
     "owner": {
         "id":"484252135131971584"
     },
     "name":"RiverBot",
     "activity": {
-        "name":"v1.0.0",
+        "name":"v1.0.1",
         "type":0,
         "status":"dnd",
         "url":"https://google.com/"
