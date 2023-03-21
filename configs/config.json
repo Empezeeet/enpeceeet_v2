@@ -1,8 +1,9 @@
 {
     "bot": {
-        "token":"MTA1NTM3MDQ0NjM0Nzk2ODU4NA.GPXnnM.rziu2ZXKIoek3IpJZcxAVkDI7agGgVzALILc68",
-        "id":"1055370446347968584",
-        "client_secret":"wCLOefvgNirx3xsmzuVWEltZNHe3BDzo"
+        "token":"MTA0NjE5Mjk2MzY0ODIzNzY5OA.Gy6Sd1.-zd5QsYD1OC-Cl0Y13LzBDsFoYKBA7XyT7wNlk",
+        "id":"1046192963648237698",
+        "client_secret":"kzAc1z2VxPMaxmF1L7dMiJsce5I1rfD0",
+        "public_key":"25c5b6b756b1f3dd16ffff0da12a09d0ddf37e933e4f997474bb63c0aa2687ad"
     },
     "version":"1.0.1",
     "owner": {

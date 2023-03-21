@@ -7,11 +7,10 @@ import console.utils as utils
 import socket
 import threading
 from colorama import just_fix_windows_console
-import modules.command_handlers as ch
 # OWN MODULES
 import modules.gateway_handler as gh
 
-
+import modules.funfact as ff
 
 # Change Activity settings in config.json
 start_time = time.time()
@@ -32,7 +31,7 @@ with open("configs/config.json", "r") as config:
 
 
 
-
+funGen = ff.FunFactGenerator()
 
 
 
@@ -86,30 +85,26 @@ try:
             
             recv = handler.receive_json_response(handler.ws)
             if not recv: continue # If Recv is nothing just continue.
-            #try:
             handler.last_sequence = recv['s']
             handler.logger.log("MAIN", f"Event Received: {recv['t']}")
+            
             if recv['t'] == "INTERACTION_CREATE":
-                print(recv)
-                if "name" in recv['d']['data'].keys() and recv['d']['data']['name'] == "setup": 
-                    ch.handleSetup(recv, handler)
-                    continue
-                if "token" in recv['d']:
-                    ch.handleLangChange(recv, handler, )
-                    continue
+                if recv['d']['data']['name'] in handler.active_commands:
+                    print(recv)
+                    recv = recv['d']
+                    handler.logger.log("MAIN", "Command Received")
+                    url = f"https://discord.com/api/v10/interactions/{recv['id']}/{recv['token']}/callback"
+                    dzejson = {
+                            "type":4, "data":{"content":f"Fact: {funGen.getFunFact()}"}
+                        }
+                    req = requests.post(url, json=dzejson, headers={"Content-Type": "application/json"})
+                    handler.logger.log("MAIN", f"Command Response: {req.status_code}")
+                    if req.status_code > 204:
+                        handler.logger.log("MAIN", f"Command Response: {req.json()}")
                     
                 
-                
-                      
-                
-                
-                # Check if user has permissions to use this command
-                
-                
-                
-            #except KeyError as e:
-            #    handler.logger.log(colored("ERROR", "red"), f"TypeError[main]: {e}")
             
+                    
             
             
 except KeyboardInterrupt:

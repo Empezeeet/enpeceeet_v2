@@ -116,39 +116,42 @@ class GatewayHandler(threading.Thread):
             "Authorization": f"Bot {self.TOKEN}"
         }
         with open("configs/commands.json", "r") as file:
-            for loaded_command in json.load(file)['commands']:
-                self.active_commands.append(loaded_command["name"])
-                while True:
-                    self.logger.log("CLOADER", f"Creating command {loaded_command['name']}")
-                    r = requests.post(url, headers=headers, json=loaded_command)
-                    self.logger.log("CLOADER", f"Loaded Command with result: {r.status_code}")
+            try:
+                for loaded_command in json.load(file)['commands']:
+                    self.active_commands.append(loaded_command["name"])
+                    while True:
+                        self.logger.log("CLOADER", f"Creating command {loaded_command['name']}")
+                        r = requests.post(url, headers=headers, json=loaded_command)
+                        self.logger.log("CLOADER", f"Loaded Command with result: {r.status_code}")
 
-                    if r.status_code == 429:
-                        # Rate limited
-                        self.logger.log("CLOADER", colored(f"Rate limited. Waiting {r.json()['retry_after']} seconds", "yellow"))
-                        time.sleep(r.json()['retry_after'])
-                        self.rate_limit_sum += r.json()['retry_after']
-                        pass
-                    
-                    if r.status_code > 204 and r.status_code != 429:
-                        # Error
-                        self.logger.log("CLOADER", colored(f"Error: {r.json()}", "red"))
-                        break
-                    break
-            for command in requests.get(url, headers={"Authorization": f"Bot {self.TOKEN}"}).json():
-                while True:
-                    if command['name'] not in self.active_commands:
-                        self.logger.log("CLOADER", f"Command {command['name']} does not exist in the loaded commands. Deleting...")
-                        r = requests.delete(f"{url}/{command['id']}", headers=headers)
                         if r.status_code == 429:
                             # Rate limited
                             self.logger.log("CLOADER", colored(f"Rate limited. Waiting {r.json()['retry_after']} seconds", "yellow"))
                             time.sleep(r.json()['retry_after'])
                             self.rate_limit_sum += r.json()['retry_after']
                             pass
-                    else:
-                        self.logger.log("CLOADER", f"Command {command['name']} exists in the loaded commands. Skipping...")
-                    break
+                        
+                        if r.status_code > 204 and r.status_code != 429:
+                            # Error
+                            self.logger.log("CLOADER", colored(f"Error: {r.json()}", "red"))
+                            break
+                        break
+                for command in requests.get(url, headers={"Authorization": f"Bot {self.TOKEN}"}).json():
+                    while True:
+                        if command['name'] not in self.active_commands:
+                            self.logger.log("CLOADER", f"Command {command['name']} does not exist in the loaded commands. Deleting...")
+                            r = requests.delete(f"{url}/{command['id']}", headers=headers)
+                            if r.status_code == 429:
+                                # Rate limited
+                                self.logger.log("CLOADER", colored(f"Rate limited. Waiting {r.json()['retry_after']} seconds", "yellow"))
+                                time.sleep(r.json()['retry_after'])
+                                self.rate_limit_sum += r.json()['retry_after']
+                                pass
+                        else:
+                            self.logger.log("CLOADER", f"Command {command['name']} exists in the loaded commands. Skipping...")
+                        break
+            except KeyError:
+                print("ERROR: No commands or commands.json in not properly formatted!")
     
     def setup_commands2(self):
         url = f"https://discord.com/api/v10/applications/{self.APPID}/commands"
